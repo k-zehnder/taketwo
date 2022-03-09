@@ -38,5 +38,5 @@ def get_session():
     session = firestore.client()
     return session
 
-def get_current(tags):
+def get_current_value(tags):
     return tags[0].get("value")
