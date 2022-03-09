@@ -16,7 +16,7 @@ async def main():
 
 @router.post("/increment", status_code=200, response_model=Tag)
 async def increment(tag: Tag):
-    tags = get_tag_by_name(session, tag)
+    tag = get_tag_by_name(session, tag)
     if tag:
         current_value = get_current(tag)
         return update_tag(session, tag, current_value)
