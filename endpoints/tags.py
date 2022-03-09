@@ -3,8 +3,6 @@ from fastapi import FastAPI
 from helpers import Tag, get_all_tags, get_session, create_tag, get_current, update_tag, get_tag_by_name
 import uvicorn
 from fastapi import APIRouter
-from api_functions import ResponseModel, ErrorResponseModel
-import geocoder
 
 router = APIRouter()
 
