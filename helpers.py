@@ -3,10 +3,17 @@ from firebase_admin import credentials, firestore, initialize_app
 from fastapi import FastAPI
 from typing import Set
 from pydantic import BaseModel, validator
+import string
+import re
 
 
-VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# VALID_VALUE_CHARACTERS = list(range(0, 10))
+VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' 
+VALID_NAME_RANGE = [str(i) for i in range(3, 16)]
+
+
+def is_valid(query):
+    matched = re.findall('\d+', query)
+    return all(m in VALID_NAME_RANGE for m in matched)
 
 
 class Tag(BaseModel):
@@ -15,15 +22,20 @@ class Tag(BaseModel):
 
     @validator("name")
     def is_valid_name(cls, name):
-        if any(char not in VALID_NAME_CHARACTERS for char in name):
-            raise ValueError("Bad name")
+        print(is_valid(name))
+        is_valid_name = is_valid(name)
+        if not is_valid_name:
+             raise ValueError("Bad name, digits are {3, 15}.")       
+
+        if any(char not in VALID_NAME_CHARACTERS for char in name if char.isalpha()):
+            raise ValueError("Bad name, must be character.")
         return name
 
     @validator("value")
     def is_valid_value(cls, value):
         """Validator to check whether value is valid"""
-        if not isinstance(value, int) or not 0 < value < 10:
-            raise ValueError("Bad value, must be integer less than 10.")
+        if not isinstance(value, int) or not 0 <= value < 10:
+            raise ValueError("Bad value, must be integer and 0 <= integer < 10")
         return value
 
     class Config:
