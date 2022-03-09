@@ -9,12 +9,12 @@ from starlette.responses import RedirectResponse
 session = get_session()
 router = APIRouter()
 
-@router.get("/", name="Home Page", status_code=200, description="API Documentation Page.")
+@router.get("/", name="Home Page", description="API Documentation Page.")
 async def main():
     """API Documentation Page."""
     return "home"
 
-@router.post("/increment", status_code=200, response_model=Tag)
+@router.post("/increment", response_model=Tag)
 async def increment(tag: Tag):
     tag = get_tag_by_name(session, tag)
     if tag:
@@ -23,7 +23,7 @@ async def increment(tag: Tag):
     print(f"[INFO] {tag.name} does not exist...adding..")
     return create_tag(session, tag)
 
-@router.get("/get_tags", status_code=200, response_model=List[Tag])
+@router.get("/get_tags", response_model=List[Tag])
 async def get_tags():
     return get_all_tags(session)
 
