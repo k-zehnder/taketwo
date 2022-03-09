@@ -25,8 +25,8 @@ class Tag(BaseModel):
     @validator("name")
     def is_valid_name(cls, name):
         print(is_valid_digits(name))
-        valid_name = is_valid_digits(name)
-        if not valid_name:
+        valid_digits = is_valid_digits(name)
+        if not valid_digits:
              raise ValueError("Bad name, digits are {3, 15}.") 
         valid_chars = is_valid_chars(name)      
         if not valid_chars:
