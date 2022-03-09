@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from helpers import Tag, get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name
 from fastapi import APIRouter
 from starlette.responses import RedirectResponse
+from typing import Set
 
 
 session = get_session()

@@ -1,13 +1,30 @@
 from fastapi import FastAPI
 from firebase_admin import credentials, firestore, initialize_app
 from fastapi import FastAPI
-from pydantic import BaseModel
+from typing import Set
+from pydantic import BaseModel, validator
+
+
+VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# VALID_VALUE_CHARACTERS = list(range(0, 10))
 
 
 class Tag(BaseModel):
-    #TODO: set validators for constraints in the problem definition
     name: str
     value: int
+
+    @validator("name")
+    def is_valid_name(cls, name):
+        if any(char not in VALID_NAME_CHARACTERS for char in name):
+            raise ValueError("Bad name")
+        return name
+
+    @validator("value")
+    def is_valid_value(cls, value):
+        """Validator to check whether value is valid"""
+        if not isinstance(value, int) or not 0 < value < 10:
+            raise ValueError("Bad value, must be integer less than 10.")
+        return value
 
     class Config:
         orm_mode = True
