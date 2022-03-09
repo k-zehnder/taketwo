@@ -33,7 +33,7 @@ def create_tag(session, tag):
 
 def get_session():
     #Initialize Firestore DB
-    cred = credentials.Certificate("./takehome-343521-1183dad3c17f.json")
+    cred = credentials.Certificate("./taketwo-343609-f27f94265a0f.json")
     default_app = initialize_app(cred)
     session = firestore.client()
     return session

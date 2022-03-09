@@ -5,3 +5,4 @@ pydantic
 uvicorn
 uvloop
 httptools
+firebase_admin
