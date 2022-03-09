@@ -16,7 +16,7 @@ def is_valid_digits(query):
     return all(m in VALID_NAME_RANGE for m in matched)
 
 def is_valid_chars(query):
-    return any(char not in VALID_NAME_CHARACTERS for char in query if char.isalpha())
+    return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
 
 class Tag(BaseModel):
     name: str
@@ -29,7 +29,7 @@ class Tag(BaseModel):
         if not valid_name:
              raise ValueError("Bad name, digits are {3, 15}.") 
         valid_chars = is_valid_chars(name)      
-        if valid_chars:
+        if not valid_chars:
             raise ValueError("Bad name, must be character.")
         return name
 
