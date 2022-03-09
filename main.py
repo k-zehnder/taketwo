@@ -3,8 +3,8 @@ from routers import router
 
 # fastapi app
 app = FastAPI(
-    title="MyGeocoder",
-    description="A simple Geocoding API Service built with FastAPI",
+    title="MyTakeHomeTest",
+    description="A simple API Service built with FastAPI",
     version="0.1"
 )
 
