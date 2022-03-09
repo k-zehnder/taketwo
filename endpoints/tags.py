@@ -14,7 +14,7 @@ async def main():
     return "home"
 
 @router.post("/increment", status_code=200,response_model=Tag)
-def increment(tag: Tag):
+async def increment(tag: Tag):
     tags = get_tag_by_name(session, tag)
     if tags:
         current_value = get_current(tags)
@@ -23,7 +23,7 @@ def increment(tag: Tag):
     return create_tag(session, tag)
 
 @router.get("/get_tags", status_code=200,response_model=List[Tag])
-def get_tags():
+async def get_tags():
     return get_all_tags(session)
 
 
