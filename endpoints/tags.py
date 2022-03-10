@@ -20,7 +20,7 @@ async def main():
     return RedirectResponse(url="/docs/")
 
 @router.post("/increment", status_code=200, response_model=Tag)
-def increment(tag: Tag):
+async def increment(tag: Tag):
     tags = get_tag_by_name(session, tag)
     if tags:
         current_value = get_current_value(tags)
@@ -29,7 +29,7 @@ def increment(tag: Tag):
     return create_tag(session, tag)
 
 @router.get("/get_tags", status_code=200, response_model=List[Tag])
-def get_tags():
+async def get_tags():
     tag_sum = sum_all_tags(session)
     log_tag_sum(logger, tag_sum)
     return get_all_tags(session)
