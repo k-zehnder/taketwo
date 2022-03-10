@@ -1,9 +1,9 @@
 from typing import List
 from fastapi import FastAPI
-from helpers import Tag, get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name, sum_all_tags, log_tag_sum
+from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name, sum_all_tags, log_tag_sum
 from fastapi import APIRouter
+from schemas import Tag
 from starlette.responses import RedirectResponse
-from typing import Set
 import google.cloud.logging
 
 

@@ -1,5 +1,17 @@
-
 from pydantic import BaseModel, validator
+import re
+
+
+VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' 
+VALID_NAME_RANGE = [str(i) for i in range(3, 16)]
+
+
+def is_valid_digits(query):
+    matched = re.findall('\d+', query)
+    return all(m in VALID_NAME_RANGE for m in matched)
+
+def is_valid_chars(query):
+    return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
 
 
 class Tag(BaseModel):

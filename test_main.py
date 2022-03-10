@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from firebase_admin import credentials, firestore, initialize_app
 from starlette.testclient import TestClient
-from helpers import Tag, get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name
+from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name
+from schemas import Tag, is_valid_digits, is_valid_chars
 from main import app
 
 # USAGE python -m pytest
