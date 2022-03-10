@@ -12,8 +12,8 @@ import os
 session = get_session()
 router = APIRouter()
 
-client = google.cloud.logging.Client()
-client.setup_logging()# use Python’s standard logging library to send logs to GCP
+# client = google.cloud.logging.Client()
+# client.setup_logging()# use Python’s standard logging library to send logs to GCP
 
 @router.get("/", name="Home Page", description="API Documentation Page.")
 async def main():
@@ -33,10 +33,10 @@ def increment(tag: Tag):
 def get_tags():
     tag_sum = sum_all_tags(session)
     print(f'[INFO] sum: {tag_sum}')
-    logging.info("logging sum", extra={
-        "labels": {"type": "app_health"},
-        "trace": "01234" # + uuid
-    })
+    # logging.info("logging sum", extra={
+    #     "labels": {"type": "app_health"},
+    #     "trace": "01234" # + uuid
+    # })
     return get_all_tags(session)
 
 
