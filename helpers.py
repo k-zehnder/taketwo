@@ -1,3 +1,4 @@
+import google.cloud.logging
 from firebase_admin import credentials, firestore, initialize_app
 from schemas import Tag
 
@@ -42,3 +43,7 @@ def log_new_tag(logger, tag):
     logger.log(f"[NEW_TAG] {tag.name}", resource={"type":"global", 
         "labels":{"tag" : "create"}})
 
+def get_logger(name):
+    client = google.cloud.logging.Client()
+    logger = client.logger(name) # name="post_count"
+    return logger

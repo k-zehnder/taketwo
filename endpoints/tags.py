@@ -1,5 +1,5 @@
 from typing import List
-from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name, get_tag_sum, log_tag_sum, log_new_tag
+from helpers import get_all_tags, get_session, get_logger, create_tag, get_current_value, update_tag, get_tags_by_name, get_tag_sum, log_tag_sum, log_new_tag
 from fastapi import APIRouter, status
 from schemas import Tag
 import google.cloud.logging
@@ -7,8 +7,7 @@ import google.cloud.logging
 
 router = APIRouter()
 
-client = google.cloud.logging.Client()
-logger = client.logger(name="post_count")
+logger = get_logger("post_count")
 session = get_session()
 
 
