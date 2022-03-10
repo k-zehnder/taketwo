@@ -5,6 +5,9 @@ from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 from typing import Set
 import google.cloud.logging
+import logging
+import json
+
 
 session = get_session()
 router = APIRouter()
@@ -30,6 +33,7 @@ def increment(tag: Tag):
 def get_tags():
     tag_sum = sum_all_tags(session)
     print(f'[INFO] sum: {tag_sum}')
-    # logger.log(f"Total request count: {tag_sum}"
+    log_data = {"total tag count": tag_sum}
+    logging.info(json.dumps(log_data))
     return get_all_tags(session)
 
