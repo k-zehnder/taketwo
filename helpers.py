@@ -42,19 +42,3 @@ def log_new_tag(logger, tag):
     logger.log(f"[NEW_TAG] {tag.name}", resource={"type":"global", 
         "labels":{"tag" : "create"}})
 
-"""
-Example of total tag count payload stored in Google Cloud Platform Logging.
-{
-    insertId: "1l5w75vfh4rv49"
-    logName: "projects/project3-343609/logs/post_count"
-    receiveTimestamp: "2022-03-10T06:38:49.656625022Z"
-    resource: {
-    labels: {
-        project_id: "project3-343609"
-    }
-        type: "global"
-    }
-    textPayload: "[TAG_TOTAL] 1"
-    timestamp: "2022-03-10T06:38:49.656625022Z"
-}
-"""

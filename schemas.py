@@ -2,7 +2,7 @@ from pydantic import BaseModel, validator
 import re
 
 
-VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' 
+VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz' 
 VALID_NAME_RANGE = [str(i) for i in range(3, 16)]
 
 
