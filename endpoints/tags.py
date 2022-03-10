@@ -26,6 +26,8 @@ def increment(tag: Tag):
 
 @router.get("/get_tags", status_code=200, response_model=List[Tag])
 def get_tags():
+    # all_tags = get_all_tags(session)
+    # logger.log(f"Total request count: {len(all_tags)}")
     return get_all_tags(session)
 
 
