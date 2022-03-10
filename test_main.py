@@ -23,7 +23,7 @@ def test_db_init():
     assert session != None
 
 def test_create_tag():
-    response = client.post(
+    response = client.put(
         "/increment_tag",
         json={"name": "init_foo", "value": 0},
     )
@@ -42,7 +42,7 @@ def test_read_tag():
         }]
 
 def test_increment_tag():
-    response = client.post(
+    response = client.put(
         "/increment_tag",
         json={"name": "init_foo", "value": 1}
     )
