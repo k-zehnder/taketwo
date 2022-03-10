@@ -28,12 +28,5 @@ class Tag(BaseModel):
              raise ValueError("Invalid digits") 
         return name
 
-    @validator("value")
-    def is_valid_value(cls, value):
-        """Validator to check whether value is valid"""
-        if not 0 <= value < 10:
-            raise ValueError("Invalid value, must be integer and 0 <= integer < 10")
-        return value
-
     class Config:
         orm_mode = True
