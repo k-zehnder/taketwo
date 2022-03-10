@@ -2,7 +2,8 @@ from firebase_admin import credentials, firestore, initialize_app
 from schemas import Tag
 
 
-def update_tag(session, tag, current_value):
+def update_tag(session, tag):
+    current_value = get_current_value(tag)
     session.collection(u'tagdb').document(tag.name).update({
                 'value': tag.value + current_value
             })
@@ -30,8 +31,8 @@ def get_session():
     session = firestore.client()
     return session
 
-def get_current_value(tags):
-    return tags[0].get("value")
+def get_current_value(tag):
+    return tag.value
 
 def log_tag_sum(logger, tag_sum):
     logger.log(f"[TAG_TOTAL] {tag_sum}", resource={"type":"global", 

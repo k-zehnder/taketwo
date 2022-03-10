@@ -21,8 +21,7 @@ async def main():
 async def increment(tag: Tag):
     existing_tag = get_tags_by_name(session, tag)
     if existing_tag:
-        current_value = get_current_value(existing_tag)
-        return update_tag(session, tag, current_value)
+        return update_tag(session, tag)
     print(f"[INFO] {tag.name} does not exist...adding..")
     return create_tag(session, tag)
 
