@@ -37,6 +37,11 @@ def log_tag_sum(logger, tag_sum):
     logger.log(f"[TAG_TOTAL] {tag_sum}", resource={"type":"global", 
         "labels":{"total" : "update"}})
 
+def log_new_tag(logger, tag):
+    print(f"[INFO] {tag.name} does not exist...adding..")
+    logger.log(f"[NEW_TAG] {tag.name}", resource={"type":"global", 
+        "labels":{"tag" : "create"}})
+
 """
 Example of total tag count payload stored in Google Cloud Platform.
 {

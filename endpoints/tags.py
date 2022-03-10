@@ -1,5 +1,5 @@
 from typing import List
-from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name, sum_all_tags, log_tag_sum
+from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name, sum_all_tags, log_tag_sum, log_new_tag
 from fastapi import APIRouter, status
 from schemas import Tag
 import google.cloud.logging
@@ -18,7 +18,7 @@ async def increment_tag(tag: Tag):
     if existing_tag:
         current_value = get_current_value(existing_tag)
         return update_tag(session, tag, current_value)
-    print(f"[INFO] {tag.name} does not exist...adding..")
+    log_new_tag(logger, tag)
     return create_tag(session, tag)
 
 @router.get("/get_tags", status_code=status.HTTP_200_OK, response_model=List[Tag], tags=["Tags"])
