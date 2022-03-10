@@ -40,6 +40,6 @@ def increment(tag: Tag):
 def get_tags():
     tag_sum = sum_all_tags(session)
     logger.log("[INFO] logging tag total", resource={"type":"global", 
-        "labels":{"total" : tag_sum}})
+        "labels":{"total" : f"{tag_sum}"}})
     return get_all_tags(session)
 
