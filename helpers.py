@@ -77,3 +77,7 @@ def get_session():
 
 def get_current_value(tags):
     return tags[0].get("value")
+
+def log_tag_sum(logger, tag_sum):
+    logger.log(f"[TAG_TOTAL] {tag_sum}", resource={"type":"global", 
+        "labels":{"total" : "update"}})

@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import FastAPI
-from helpers import Tag, get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name, sum_all_tags
+from helpers import Tag, get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name, sum_all_tags, log_tag_sum
 from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 from typing import Set
@@ -31,7 +31,6 @@ def increment(tag: Tag):
 @router.get("/get_tags", status_code=200, response_model=List[Tag])
 def get_tags():
     tag_sum = sum_all_tags(session)
-    logger.log(f"[TAG_TOTAL] {tag_sum}", resource={"type":"global", 
-        "labels":{"total" : "update"}})
+    log_tag_sum(logger, tag_sum)
     return get_all_tags(session)
 
