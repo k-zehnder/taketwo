@@ -3,12 +3,17 @@ from fastapi import FastAPI
 from helpers import Tag, get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name, sum_all_tags
 from fastapi import APIRouter
 from starlette.responses import RedirectResponse
-from typing import Set
 
+import google.cloud.logging
+import logging
+from datetime import datetime, timedelta, timezone
+import os
 
 session = get_session()
 router = APIRouter()
 
+client = google.cloud.logging.Client()
+client.setup_logging()# use Python’s standard logging library to send logs to GCP
 
 @router.get("/", name="Home Page", description="API Documentation Page.")
 async def main():
@@ -26,10 +31,12 @@ def increment(tag: Tag):
 
 @router.get("/get_tags", status_code=200, response_model=List[Tag])
 def get_tags():
-    # all_tags = get_all_tags(session)
-    # logger.log(f"Total request count: {len(all_tags)}")
-    summ = sum_all_tags(session)
-    print(f'[INFO] sum: {summ}')
+    tag_sum = sum_all_tags(session)
+    print(f'[INFO] sum: {tag_sum}')
+    logging.info("logging sum", extra={
+        "labels": {"type": "app_health"},
+        "trace": "01234" # + uuid
+    })
     return get_all_tags(session)
 
 
