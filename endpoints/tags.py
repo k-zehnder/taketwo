@@ -6,11 +6,11 @@ from starlette.responses import RedirectResponse
 import google.cloud.logging
 
 
-session = get_session()
 router = APIRouter()
 
 client = google.cloud.logging.Client()
 logger = client.logger(name="post_count")
+session = get_session()
 
 
 @router.get("/", name="Home Page", status_code=200, description="API Documentation Page.")
