@@ -18,8 +18,7 @@ router = APIRouter()
 
 import google.cloud.logging
 client = google.cloud.logging.Client()
-logger = client.logger()# read logs from GCP
-client.list_entries(max_size=5)# write log to GCP
+logger = client.logger(name="post_count")# read logs from GCP
 logger.log("hello world", resource={"type":"global", "labels":{}})
 
 
