@@ -2,7 +2,6 @@ from typing import List
 from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name, sum_all_tags, log_tag_sum
 from fastapi import APIRouter, status
 from schemas import Tag
-from starlette.responses import RedirectResponse
 import google.cloud.logging
 
 
@@ -13,8 +12,8 @@ logger = client.logger(name="post_count")
 session = get_session()
 
 
-@router.post("/increment", status_code=status.HTTP_201_CREATED, response_model=Tag, tags=["Tags"])
-async def increment(tag: Tag):
+@router.post("/increment_tag", status_code=status.HTTP_201_CREATED, response_model=Tag, tags=["Tags"])
+async def increment_tag(tag: Tag):
     existing_tag = get_tags_by_name(session, tag)
     if existing_tag:
         current_value = get_current_value(existing_tag)
