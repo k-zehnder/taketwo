@@ -13,7 +13,7 @@ client = google.cloud.logging.Client()
 logger = client.logger(name="post_count")
 
 
-@router.get("/", name="Home Page", description="API Documentation Page.")
+@router.get("/", name="Home Page", status_code=200, description="API Documentation Page.")
 async def main():
     return RedirectResponse(url="/docs/")
 
