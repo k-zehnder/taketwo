@@ -11,12 +11,7 @@ import os
 client = google.cloud.logging.Client()
 client.setup_logging()# use Python’s standard logging library to send logs to GCP
 
-logging.warning("Hello World!")
-logging.info("hello", extra={
-    "labels": {"foo": "bar"},
-    "http_request": {"requestUrl": "localhost"},
-    "trace": "01234"
-})
+
 
 yesterday = datetime.now(timezone.utc) - timedelta(minutes=10)
 # Cloud Logging expects a timestamp in RFC3339 UTC "Zulu" format

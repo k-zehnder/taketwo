@@ -4,10 +4,21 @@ from helpers import Tag, get_all_tags, get_session, create_tag, get_current_valu
 from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 from typing import Set
-
+import google.cloud.logging
 
 session = get_session()
 router = APIRouter()
+
+client = google.cloud.logging.Client()
+logger = client.logger()
+
+logger.warning("Hello World!")
+logger.log(
+    "an entry with fields set",
+    severity="ERROR",
+    insert_id="0123",
+    labels={"my-label": "my-value"},
+)  # API call
 
 
 @router.get("/", name="Home Page", description="API Documentation Page.")
