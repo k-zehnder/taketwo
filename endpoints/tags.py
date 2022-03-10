@@ -1,5 +1,5 @@
 from typing import List
-from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name, sum_all_tags, log_tag_sum
+from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name, sum_all_tags, log_tag_sum
 from fastapi import APIRouter
 from schemas import Tag
 from starlette.responses import RedirectResponse
@@ -19,9 +19,9 @@ async def main():
 
 @router.post("/increment", status_code=200, response_model=Tag)
 async def increment(tag: Tag):
-    tags = get_tag_by_name(session, tag)
-    if tags:
-        current_value = get_current_value(tags)
+    existing_tag = get_tags_by_name(session, tag)
+    if existing_tag:
+        current_value = get_current_value(existing_tag)
         return update_tag(session, tag, current_value)
     print(f"[INFO] {tag.name} does not exist...adding..")
     return create_tag(session, tag)

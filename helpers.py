@@ -18,7 +18,7 @@ def sum_all_tags(session):
     all_tags = [Tag(name=c.get("name"), value=c.get("value")) for c in collection]
     return sum(t.value for t in all_tags)
 
-def get_tag_by_name(session, tag):
+def get_tags_by_name(session, tag):
     return list(session.collection(u'tagdb').where(u'name', u'==', tag.name).stream())
 
 def create_tag(session, tag):
