@@ -18,7 +18,7 @@ router = APIRouter()
 
 import google.cloud.logging
 client = google.cloud.logging.Client()
-logger = client.logger(name="log_id")# read logs from GCP
+logger = client.logger()# read logs from GCP
 client.list_entries(max_size=5)# write log to GCP
 logger.log("hello world", resource={"type":"global", "labels":{}})
 
@@ -40,8 +40,8 @@ def increment(tag: Tag):
 @router.get("/get_tags", status_code=200, response_model=List[Tag])
 def get_tags():
     tag_sum = sum_all_tags(session)
-    print(f'[INFO] sum: {tag_sum}')
-    log_data = {"total tag count": tag_sum}
-    logging.info(json.dumps(log_data))
+    # print(f'[INFO] sum: {tag_sum}')
+    # log_data = {"total tag count": tag_sum}
+    # logging.info(json.dumps(log_data))
     return get_all_tags(session)
 
