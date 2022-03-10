@@ -31,6 +31,3 @@ def get_tags():
     # logger.log(f"Total request count: {tag_sum}"
     return get_all_tags(session)
 
-
-
-
