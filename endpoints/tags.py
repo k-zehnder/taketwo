@@ -10,16 +10,7 @@ session = get_session()
 router = APIRouter()
 
 client = google.cloud.logging.Client()
-logger = client.logger()
-
-logger.warning("Hello World!")
-logger.log(
-    "an entry with fields set",
-    severity="ERROR",
-    insert_id="0123",
-    labels={"my-label": "my-value"},
-)  # API call
-
+client.setup_logging()# use Python’s standard logging library to send logs to GCP
 
 @router.get("/", name="Home Page", description="API Documentation Page.")
 async def main():
