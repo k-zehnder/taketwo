@@ -5,18 +5,11 @@ from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 from typing import Set
 import google.cloud.logging
-import logging
-import json
 
 
 session = get_session()
 router = APIRouter()
 
-# client = google.cloud.logging.Client()
-# client.setup_logging()# use Python’s standard logging library to send logs to GCP
-
-
-import google.cloud.logging
 client = google.cloud.logging.Client()
 logger = client.logger(name="post_count")# read logs from GCP
 logger.log("hello world", resource={"type":"global", "labels":{}})
