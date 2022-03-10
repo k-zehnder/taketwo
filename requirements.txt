@@ -6,4 +6,4 @@ uvicorn
 uvloop
 httptools
 firebase_admin
-google-cloud-logging
+google-cloud-logging>=3.0.0

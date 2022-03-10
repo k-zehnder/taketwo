@@ -12,8 +12,16 @@ import json
 session = get_session()
 router = APIRouter()
 
+# client = google.cloud.logging.Client()
+# client.setup_logging()# use Python’s standard logging library to send logs to GCP
+
+
+import google.cloud.logging
 client = google.cloud.logging.Client()
-client.setup_logging()# use Python’s standard logging library to send logs to GCP
+logger = client.logger(name="log_id")# read logs from GCP
+client.list_entries(max_size=5)# write log to GCP
+logger.log("hello world", resource={"type":"global", "labels":{}})
+
 
 @router.get("/", name="Home Page", description="API Documentation Page.")
 async def main():
