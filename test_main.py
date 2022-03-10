@@ -27,7 +27,7 @@ def test_create_tag():
         "/increment",
         json={"name": "init_foo", "value": 0},
     )
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {
             "name": "init_foo",
             "value": 0
@@ -46,7 +46,7 @@ def test_increment_tag():
         "/increment",
         json={"name": "init_foo", "value": 1}
     )
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {
             "name": "init_foo",
             "value": 1

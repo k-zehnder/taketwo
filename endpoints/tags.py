@@ -13,10 +13,6 @@ logger = client.logger(name="post_count")
 session = get_session()
 
 
-# @router.get("/", name="Home Page", status_code=status.HTTP_200_OK, description="API Documentation Page.")
-# async def main():
-#     return RedirectResponse(url="/docs/")
-
 @router.post("/increment", status_code=status.HTTP_201_CREATED, response_model=Tag, tags=["Tags"])
 async def increment(tag: Tag):
     existing_tag = get_tags_by_name(session, tag)
@@ -26,9 +22,11 @@ async def increment(tag: Tag):
     print(f"[INFO] {tag.name} does not exist...adding..")
     return create_tag(session, tag)
 
-@router.get("/get_tags", status_code=status.HTTP_200_OK, response_model=List[Tag])
+@router.get("/get_tags", status_code=status.HTTP_200_OK, response_model=List[Tag], tags=["Tags"])
 async def get_tags():
     tag_sum = sum_all_tags(session)
     log_tag_sum(logger, tag_sum)
     return get_all_tags(session)
+
+
 

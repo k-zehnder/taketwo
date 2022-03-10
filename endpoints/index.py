@@ -1,4 +1,3 @@
-from typing import List
 from fastapi import APIRouter, status
 from starlette.responses import RedirectResponse
 
