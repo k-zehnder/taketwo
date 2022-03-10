@@ -11,8 +11,7 @@ session = get_session()
 router = APIRouter()
 
 client = google.cloud.logging.Client()
-logger = client.logger(name="post_count")# read logs from GCP
-logger.log("hello world", resource={"type":"global", "labels":{}})
+logger = client.logger(name="post_count")
 
 
 @router.get("/", name="Home Page", description="API Documentation Page.")
