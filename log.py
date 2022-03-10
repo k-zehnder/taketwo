@@ -10,6 +10,7 @@ def get_logs(logger, filter_str):
         print()
         print()
 
+
 if __name__ == "__main__":
     client = google.cloud.logging.Client()
     logger = client.logger(name="post_count")
@@ -25,3 +26,5 @@ if __name__ == "__main__":
     )
     
     get_logs(logger, filter_str)
+
+    

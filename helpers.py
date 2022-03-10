@@ -12,11 +12,8 @@ def get_all_tags(session):
     collection = session.collection(u'tagdb').stream()
     return [Tag(name=c.get("name"), value=c.get("value")) for c in collection]
 
-
 def sum_all_tags(session):
-    collection = session.collection(u'tagdb').stream()
-    all_tags = [Tag(name=c.get("name"), value=c.get("value")) for c in collection]
-    return sum(t.value for t in all_tags)
+    return sum(t.value for t in get_all_tags(session))
 
 def get_tags_by_name(session, tag):
     return list(session.collection(u'tagdb').where(u'name', u'==', tag.name).stream())
@@ -41,7 +38,7 @@ def log_tag_sum(logger, tag_sum):
         "labels":{"total" : "update"}})
 
 """
-Example full log payload sent to GCP from 'log_tag_sum' function above.
+Example of total tag count payload stored in Google Cloud Platform.
 {
     insertId: "1l5w75vfh4rv49"
     logName: "projects/project3-343609/logs/post_count"

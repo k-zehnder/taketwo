@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from routers import router
 
+
 # fastapi app
 app = FastAPI(
     title="MyTakeHomeTest",
@@ -10,5 +11,3 @@ app = FastAPI(
 
 app.include_router(router)
 
-
-# uvicorn main:app --reload
