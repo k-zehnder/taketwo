@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from firebase_admin import credentials, firestore, initialize_app
 from starlette.testclient import TestClient
-from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tag_by_name
+from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name
 from schemas import Tag, is_valid_digits, is_valid_chars
 from main import app
+import pytest 
+
 
 # USAGE python -m pytest
 
@@ -42,7 +44,7 @@ def test_read_tag():
 def test_increment_tag():
     response = client.post(
         "/increment",
-        json={"name": "init_foo", "value": 1},
+        json={"name": "init_foo", "value": 1}
     )
     assert response.status_code == 200
     assert response.json() == {
@@ -50,44 +52,3 @@ def test_increment_tag():
             "value": 1
         }
 
-# def test_read_item_bad_count():
-#     response = client.get("/items/foo", headers={"X-Token": "hailhydra"})
-#     assert response.status_code == 400
-#     assert response.json() == {"detail": "Invalid X-Token header"}
-
-
-# def test_read_item_bad_token():
-#     response = client.get("/items/foo", headers={"X-Token": "hailhydra"})
-#     assert response.status_code == 400
-#     assert response.json() == {"detail": "Invalid X-Token header"}
-
-
-# def test_read_inexistent_item():
-#     response = client.get("/items/baz", headers={"X-Token": "coneofsilence"})
-#     assert response.status_code == 404
-#     assert response.json() == {"detail": "Item not found"}
-
-
-
-# def test_create_item_bad_token():
-#     response = client.post(
-#         "/items/",
-#         headers={"X-Token": "hailhydra"},
-#         json={"id": "bazz", "title": "Bazz", "description": "Drop the bazz"},
-#     )
-#     assert response.status_code == 400
-#     assert response.json() == {"detail": "Invalid X-Token header"}
-
-
-# def test_create_existing_item():
-#     response = client.post(
-#         "/items/",
-#         headers={"X-Token": "coneofsilence"},
-#         json={
-#             "id": "foo",
-#             "title": "The Foo ID Stealers",
-#             "description": "There goes my stealer",
-#         },
-#     )
-#     assert response.status_code == 400
-#     assert response.json() == {"detail": "Item already exists"}
