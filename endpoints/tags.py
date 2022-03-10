@@ -39,7 +39,7 @@ def increment(tag: Tag):
 @router.get("/get_tags", status_code=200, response_model=List[Tag])
 def get_tags():
     tag_sum = sum_all_tags(session)
-    logger.log("[INFO] logging tag total", resource={"type":"global", 
-        "labels":{"total" : f"{tag_sum}"}})
+    logger.log(f"[TAG_TOTAL] {tag_sum}", resource={"type":"global", 
+        "labels":{"total" : "update"}})
     return get_all_tags(session)
 
