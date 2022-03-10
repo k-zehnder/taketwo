@@ -12,7 +12,7 @@ def get_all_tags(session):
     collection = session.collection(u'tagdb').stream()
     return [Tag(name=c.get("name"), value=c.get("value")) for c in collection]
 
-def sum_all_tags(session):
+def get_tag_sum(session):
     return sum(t.value for t in get_all_tags(session))
 
 def get_tags_by_name(session, tag):
@@ -43,7 +43,7 @@ def log_new_tag(logger, tag):
         "labels":{"tag" : "create"}})
 
 """
-Example of total tag count payload stored in Google Cloud Platform.
+Example of total tag count payload stored in Google Cloud Platform Logging.
 {
     insertId: "1l5w75vfh4rv49"
     logName: "projects/project3-343609/logs/post_count"
