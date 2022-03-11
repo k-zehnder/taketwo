@@ -18,7 +18,7 @@ session = get_session()
 )
 async def get_tags():
     """
-    Get all Tag objects from GCP Firestore DB.
+    Get all Tag objects from GCP FireStore DB.
     """
     tag_sum = get_tag_sum(session)
     log_tag_sum(logger, tag_sum)
