@@ -1,11 +1,11 @@
 from helpers import get_all_tags, get_session, get_logger, create_tag, get_current_value, update_tag, get_tags_by_name, get_tag_sum, log_tag_sum, log_new_tag
 from fastapi import APIRouter, status
 from schemas import Tag, TagCreate, TagRead
-
+from config import LOG_NAME
 
 router = APIRouter()
 
-logger = get_logger("post_count")
+logger = get_logger(LOG_NAME)
 session = get_session()
 
 
