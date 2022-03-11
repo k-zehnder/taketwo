@@ -3,6 +3,7 @@ from fastapi import APIRouter, status
 from schemas import Tag, TagCreate, TagRead
 from config import LOG_NAME
 
+
 router = APIRouter()
 
 logger = get_logger(LOG_NAME)

@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 from firebase_admin import credentials, firestore
 from starlette.testclient import TestClient
 from schemas import Tag
