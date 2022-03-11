@@ -7,14 +7,14 @@ VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz'
 VALID_NAME_RANGE = [str(i) for i in range(3, 16)]
 
 
-def is_valid_digits(query):
+def is_valid_digits(query: str) -> bool:
     matched = re.findall('\d+', query)
     return all(m in VALID_NAME_RANGE for m in matched)
 
-def is_valid_chars(query):
+def is_valid_chars(query: str) -> bool:
     return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
 
-def is_valid_value(value):
+def is_valid_value(value: int) -> bool:
     return 0 <= value < 10
 
 
@@ -58,7 +58,7 @@ class Tag(BaseModel):
 
 class TagCreate(Tag):
     @validator("name")
-    def is_valid_name(cls, name):
+    def is_valid_name(cls, name: str):
         valid_chars = is_valid_chars(name)   
         if not valid_chars:  
             raise IsValidCharsError(value=valid_chars, message="bad 'is_valid_name'")
@@ -69,7 +69,7 @@ class TagCreate(Tag):
         return name
 
     @validator("value")
-    def is_valid_value(cls, value):
+    def is_valid_value(cls, value: int):
         valid_value = is_valid_value(value)   
         if not valid_value:
             raise IsValidValueError(value=valid_value, message="bad 'is_valid_value'")
