@@ -17,7 +17,7 @@ async def get_tags():
     log_tag_sum(logger, tag_sum)
     return get_all_tags(session)
 
-@router.put("/increment_tag", description="Alter Tag state.", status_code=status.HTTP_201_CREATED, response_model=Tag, tags=["Tags"])
+@router.post("/increment_tag", description="Alter Tag state.", status_code=status.HTTP_201_CREATED, response_model=Tag, tags=["Tags"])
 async def increment_tag(tag: Tag):
     existing_tag = get_tags_by_name(session, tag)
     if existing_tag:
