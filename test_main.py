@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from firebase_admin import credentials, firestore, initialize_app
 from starlette.testclient import TestClient
 from helpers import get_all_tags, get_session, create_tag, get_current_value, update_tag, get_tags_by_name
-from schemas import Tag, is_valid_digits, is_valid_chars
+from schemas import Tag, is_valid_digits, is_valid_chars, is_valid_value
 from main import app
 import pytest 
 
@@ -23,7 +23,7 @@ def test_db_init():
     assert session != None
 
 def test_create_tag():
-    response = client.put(
+    response = client.post(
         "/increment_tag",
         json={"name": "init_foo", "value": 0},
     )
@@ -42,7 +42,7 @@ def test_read_tag():
         }]
 
 def test_increment_tag():
-    response = client.put(
+    response = client.post(
         "/increment_tag",
         json={"name": "init_foo", "value": 1}
     )
@@ -52,3 +52,6 @@ def test_increment_tag():
             "value": 1
         }
 
+@pytest.mark.parametrize("tag", [Tag(name="tim", value=1), Tag(name="joe", value=2)])
+def test_foo(tag):
+    assert isinstance(tag, Tag)
