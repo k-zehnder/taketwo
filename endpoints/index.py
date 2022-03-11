@@ -7,7 +7,8 @@ router = APIRouter()
 
 @router.get(
     "/", 
-    name="Home Page", status_code=status.HTTP_200_OK, 
+    name="Home Page", 
+    status_code=status.HTTP_200_OK, 
     description="API Documentation Page."
 )
 async def main():

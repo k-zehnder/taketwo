@@ -2,7 +2,6 @@ from typing import List
 import google.cloud.logging
 from firebase_admin import credentials, firestore, initialize_app
 from schemas import Tag, TagRead, TagCreate
-import re
 
 
 def update_tag(session, tag: Tag, current_value: int) -> Tag:
