@@ -13,7 +13,7 @@ class Tag(BaseModel):
         schema_extra = {
             "example" : {
                 "name" : "init_foo",
-                "value" : 1
+                "value" : 0
             }
         }
 
@@ -38,7 +38,7 @@ class TagCreate(Tag):
 
 class TagRead(BaseModel):
     data: List[Tag]
-    
+
 
 def is_valid_digits(query: str) -> bool:
     matched = re.findall('\d+', query)
