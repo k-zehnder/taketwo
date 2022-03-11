@@ -49,9 +49,10 @@ def test_increment_tag():
 
 @pytest.mark.parametrize(
     "tag, exp", [
-        [Tag(name="tim", value=1), True], 
-        [Tag(name="joe", value=2), True]
+        [Tag(name="tim", value=0), True], 
+        [Tag(name="joe"), True]
     ]
 )
 def test_foo(tag, exp):
     assert isinstance(tag, Tag) == exp
+    assert tag.value == 0

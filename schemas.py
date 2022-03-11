@@ -7,7 +7,7 @@ from config import VALID_NAME_CHARACTERS, VALID_NAME_RANGE
 
 class Tag(BaseModel):
     name: str
-    value: int
+    value: int = 0
 
     class Config:
         orm_mode = True
