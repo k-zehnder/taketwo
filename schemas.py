@@ -51,7 +51,7 @@ class Tag(BaseModel):
         orm_mode = True
         schema_extra = {
             "example" : {
-                "name" : "opentrustisawesome",
+                "name" : "init_foo",
                 "value" : 1
             }
         }
