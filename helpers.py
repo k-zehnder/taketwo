@@ -3,6 +3,7 @@ import google.cloud.logging
 from firebase_admin import credentials, firestore, initialize_app
 from schemas import Tag, TagRead, TagCreate
 import re
+from config import VALID_NAME_CHARACTERS, VALID_NAME_RANGE
 
 
 def update_tag(session, tag: Tag, current_value: int) -> Tag:
@@ -38,7 +39,7 @@ def get_session():
 
 def get_logger(name: str):
     client = google.cloud.logging.Client()
-    logger = client.logger(name) # name="post_count"
+    logger = client.logger(name)
     return logger
 
 def log_tag_sum(logger, tag_sum: int):
@@ -52,3 +53,12 @@ def log_new_tag(logger, tag: TagCreate):
         resource={"type":"global", 
         "labels":{"tag" : "create"}})
 
+def is_valid_digits(query: str) -> bool:
+    matched = re.findall('\d+', query)
+    return all(m in VALID_NAME_RANGE for m in matched)
+
+def is_valid_chars(query: str) -> bool:
+    return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
+
+def is_valid_value(value: int) -> bool:
+    return 0 <= value < 10

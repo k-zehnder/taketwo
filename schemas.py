@@ -1,10 +1,7 @@
 from typing import List
 from pydantic import BaseModel, validator
 import re
-
-
-VALID_NAME_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz' 
-VALID_NAME_RANGE = [str(i) for i in range(3, 16)]
+from config import VALID_NAME_CHARACTERS, VALID_NAME_RANGE
 
 
 def is_valid_digits(query: str) -> bool:
