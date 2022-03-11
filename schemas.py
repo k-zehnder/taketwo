@@ -68,9 +68,3 @@ class IsValidValueError(Exception):
         self.value = value
         self.message = message
         super().__init__(message)
-
-def ErrorResponseModel(code, message):
-    return JSONResponse(
-        status_code=code, 
-        content={"code": code, "message": message}
-    )
