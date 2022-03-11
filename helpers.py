@@ -1,6 +1,6 @@
 import google.cloud.logging
 from firebase_admin import credentials, firestore, initialize_app
-from schemas import Tag
+from schemas import Tag, TagRead, TagCreate
 
 
 def update_tag(session, tag, current_value):

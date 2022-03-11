@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel, validator
 import re
 
@@ -21,6 +22,10 @@ class Tag(BaseModel):
     name: str
     value: int
 
+    class Config:
+        orm_mode = True
+
+class TagCreate(Tag):
     @validator("name")
     def is_valid_name(cls, name):
         valid_chars = is_valid_chars(name)   
@@ -38,5 +43,6 @@ class Tag(BaseModel):
             raise ValueError("Invalid value")
         return value  
 
-    class Config:
-        orm_mode = True
+class TagRead(BaseModel):
+    data: List[Tag]
+
