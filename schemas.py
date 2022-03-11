@@ -1,8 +1,18 @@
+import re
 from typing import List
 from pydantic import BaseModel, validator
-import re
-from helpers import is_valid_digits, is_valid_chars, is_valid_values
+from config import VALID_NAME_CHARACTERS, VALID_NAME_RANGE
 
+
+def is_valid_digits(query: str) -> bool:
+    matched = re.findall('\d+', query)
+    return all(m in VALID_NAME_RANGE for m in matched)
+
+def is_valid_chars(query: str) -> bool:
+    return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
+
+def is_valid_value(value: int) -> bool:
+    return 0 <= value < 10
 
 class IsValidCharsError(Exception):
     """Custom error that is raised when.. ."""
