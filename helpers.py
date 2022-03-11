@@ -26,7 +26,7 @@ def create_tag(session, tag: TagCreate) -> Tag:
     new_doc.set(tag.dict())  
     return tag
 
-def get_current_value(tag):
+def get_current_value(tag: Tag):
     return tag[0].get("value")
 
 def get_session():
@@ -36,16 +36,16 @@ def get_session():
     session = firestore.client()
     return session
 
-def get_logger(name):
+def get_logger(name: str):
     client = google.cloud.logging.Client()
     logger = client.logger(name) # name="post_count"
     return logger
 
-def log_tag_sum(logger, tag_sum):
+def log_tag_sum(logger, tag_sum: int):
     logger.log(f"[TAG_TOTAL] {tag_sum}", resource={"type":"global", 
         "labels":{"total" : "update"}})
 
-def log_new_tag(logger, tag):
+def log_new_tag(logger, tag: TagCreate):
     print(f"[INFO] {tag.name} does not exist...adding..")
     logger.log(f"[NEW_TAG] {tag.name}", resource={"type":"global", 
         "labels":{"tag" : "create"}})
