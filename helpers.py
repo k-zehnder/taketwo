@@ -26,7 +26,7 @@ def create_tag(session, tag: TagCreate) -> Tag:
     new_doc.set(tag.dict())  
     return tag
 
-def get_current_value(tag: Tag):
+def get_current_value(tag: Tag) -> int:
     return tag[0].get("value")
 
 def get_session():
