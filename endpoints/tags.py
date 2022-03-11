@@ -26,7 +26,7 @@ async def get_tags():
 
 @router.post(
     "/increment_tag", 
-    summary="Persist tag state.", 
+    summary="Increment Tag value.", 
     status_code=status.HTTP_201_CREATED, 
     response_model=Tag, 
     tags=["Tags"]

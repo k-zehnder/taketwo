@@ -17,24 +17,25 @@ def is_valid_chars(query):
 def is_valid_value(value):
     return 0 <= value < 10
 
-class ISBN10FormatError(Exception):
-    """Custom error that is raised when ISBN10 doesn't have the right format."""
+
+class IsValidCharsError(Exception):
+    """Custom error that is raised when.. ."""
 
     def __init__(self, value: str, message: str) -> None:
         self.value = value
         self.message = message
         super().__init__(message)
 
-class Error(Exception):
-    """Custom error that is raised when ISBN10 doesn't have the right format."""
+class IsValidDigitsError(Exception):
+    """Custom error that is raised when.. ."""
 
     def __init__(self, value: str, message: str) -> None:
         self.value = value
         self.message = message
         super().__init__(message)
 
-class Error2(Exception):
-    """Custom error that is raised when ISBN10 doesn't have the right format."""
+class IsValidValueError(Exception):
+    """Custom error that is raised when.. ."""
 
     def __init__(self, value: str, message: str) -> None:
         self.value = value
@@ -48,24 +49,30 @@ class Tag(BaseModel):
 
     class Config:
         orm_mode = True
+        schema_extra = {
+            "example" : {
+                "name" : "opentrustisawesome",
+                "value" : 1
+            }
+        }
 
 class TagCreate(Tag):
     @validator("name")
     def is_valid_name(cls, name):
         valid_chars = is_valid_chars(name)   
         if not valid_chars:  
-            raise ISBN10FormatError(value=valid_chars, message="bad 'is_valid_name'")
+            raise IsValidCharsError(value=valid_chars, message="bad 'is_valid_name'")
         
         valid_digits = is_valid_digits(name)
         if not valid_digits:
-            raise Error(value=valid_digits, message="bad 'is_valid_digits'")
+            raise IsValidDigitsError(value=valid_digits, message="bad 'is_valid_digits'")
         return name
 
     @validator("value")
     def is_valid_value(cls, value):
         valid_value = is_valid_value(value)   
         if not valid_value:
-            raise Error2(value=valid_value, message="bad 'is_valid_value'")
+            raise IsValidValueError(value=valid_value, message="bad 'is_valid_value'")
         return value  
 
 class TagRead(BaseModel):
