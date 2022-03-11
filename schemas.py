@@ -15,7 +15,31 @@ def is_valid_chars(query):
     return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
 
 def is_valid_value(value):
-    return 0 <= value <= 10
+    return 0 <= value < 10
+
+class ISBN10FormatError(Exception):
+    """Custom error that is raised when ISBN10 doesn't have the right format."""
+
+    def __init__(self, value: str, message: str) -> None:
+        self.value = value
+        self.message = message
+        super().__init__(message)
+
+class Error(Exception):
+    """Custom error that is raised when ISBN10 doesn't have the right format."""
+
+    def __init__(self, value: str, message: str) -> None:
+        self.value = value
+        self.message = message
+        super().__init__(message)
+
+class Error2(Exception):
+    """Custom error that is raised when ISBN10 doesn't have the right format."""
+
+    def __init__(self, value: str, message: str) -> None:
+        self.value = value
+        self.message = message
+        super().__init__(message)
 
 
 class Tag(BaseModel):
@@ -30,17 +54,18 @@ class TagCreate(Tag):
     def is_valid_name(cls, name):
         valid_chars = is_valid_chars(name)   
         if not valid_chars:  
-            raise ValueError("Invalid chars")  
+            raise ISBN10FormatError(value=valid_chars, message="bad 'is_valid_name'")
+        
         valid_digits = is_valid_digits(name)
         if not valid_digits:
-             raise ValueError("Invalid digits") 
+            raise Error(value=valid_digits, message="bad 'is_valid_digits'")
         return name
 
     @validator("value")
     def is_valid_value(cls, value):
         valid_value = is_valid_value(value)   
-        if not valid_value:  
-            raise ValueError("Invalid value")
+        if not valid_value:
+            raise Error2(value=valid_value, message="bad 'is_valid_value'")
         return value  
 
 class TagRead(BaseModel):
