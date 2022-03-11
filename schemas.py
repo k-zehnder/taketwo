@@ -13,6 +13,9 @@ def is_valid_digits(query):
 def is_valid_chars(query):
     return all(char in VALID_NAME_CHARACTERS for char in query if char.isalpha())
 
+def is_valid_value(value):
+    return 0 <= value <= 10
+
 
 class Tag(BaseModel):
     name: str
@@ -27,6 +30,13 @@ class Tag(BaseModel):
         if not valid_digits:
              raise ValueError("Invalid digits") 
         return name
+
+    @validator("value")
+    def is_valid_value(cls, value):
+        valid_value = is_valid_value(value)   
+        if not valid_value:  
+            raise ValueError("Invalid value")
+        return value  
 
     class Config:
         orm_mode = True
