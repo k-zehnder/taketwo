@@ -39,9 +39,10 @@ async def increment_tag(tag: TagCreate):
     - **name**: each item must have a name [a-z_]{3, 15}
     - **value**: each item must have a value 0 <= value < 10
     """
-    if existing_tag := get_tags_by_name(session, tag):
-         current_value = get_current_value(existing_tag)
-         return update_tag(session, tag, current_value)
+    existing_tag = get_tags_by_name(session, tag)
+    if existing_tag:
+        current_value = get_current_value(existing_tag)
+        return update_tag(session, tag, current_value)
     log_new_tag(logger, tag)
     return create_tag(session, tag)
 
