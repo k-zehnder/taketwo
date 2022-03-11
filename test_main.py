@@ -48,9 +48,9 @@ def test_increment_tag():
         }
 
 @pytest.mark.parametrize(
-    "tag, exp", [
-        [Tag(name="tim", value=0), True], 
-        [Tag(name="joe"), True]
+    "tag, expected", [
+        [Tag(name="alice", value=0), True], 
+        [Tag(name="bob"), True]
     ]
 )
 def test_foo(tag, exp):
