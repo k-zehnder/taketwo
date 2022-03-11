@@ -53,6 +53,6 @@ def test_increment_tag():
         [Tag(name="bob"), True]
     ]
 )
-def test_foo(tag, exp):
+def test_default_value(tag, exp):
     assert isinstance(tag, Tag) == exp
     assert tag.value == 0
