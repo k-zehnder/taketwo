@@ -29,6 +29,7 @@ def get_current_value(tag: Tag) -> int:
     return tag[0].get("value")
 
 def get_session():
+    #Initialize Firestore DB
     cred = credentials.Certificate("./project3-343609-3de9eceebaa1.json")
     default_app = initialize_app(cred)
     session = firestore.client()
