@@ -24,7 +24,7 @@ def test_db_init():
 
 def test_create_tag():
     response = client.post(
-        "/increment_tag",
+        "/increment",
         json={"name": "init_foo", "value": 1},
     )
     assert response.status_code == 201
@@ -34,7 +34,7 @@ def test_create_tag():
         }
 
 def test_read_tag():
-    response = client.get("/get_tags")
+    response = client.get("/tags")
     assert response.status_code == 200
     assert response.json() == {
             "data": [{"name": "init_foo", "value": 1}]
@@ -42,7 +42,7 @@ def test_read_tag():
 
 def test_increment_tag():
     response = client.post(
-        "/increment_tag",
+        "/increment",
         json={"name": "init_foo", "value": 1}
     )
     assert response.status_code == 201

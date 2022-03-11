@@ -44,10 +44,14 @@ def get_logger(name: str):
 def log_tag_sum(logger, tag_sum: int):
     logger.log(f"[TAG_TOTAL] {tag_sum}", 
         resource={"type":"global", 
-        "labels":{"total" : "update"}})
+        "labels":{
+            "total" : "update"}
+        })
 
 def log_new_tag(logger, tag: TagCreate):
     print(f"[INFO] {tag.name} does not exist...adding..")
     logger.log(f"[NEW_TAG] {tag.name}", 
         resource={"type":"global", 
-        "labels":{"tag" : "create"}})
+        "labels":{
+            "tag" : "create"}
+        })

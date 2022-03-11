@@ -10,9 +10,9 @@ session = get_session()
 
 
 @router.get(
-    "/get_tags", 
-    status_code=status.HTTP_200_OK, 
+    "/tags", 
     response_model=TagRead, 
+    status_code=status.HTTP_200_OK, 
     summary="Get all tags.", 
     tags=["Tags"]
 )
@@ -25,10 +25,10 @@ async def get_tags():
     return TagRead(data=get_all_tags(session))
 
 @router.post(
-    "/increment_tag", 
-    summary="Increment Tag value.", 
-    status_code=status.HTTP_201_CREATED, 
+    "/increment", 
     response_model=Tag, 
+    status_code=status.HTTP_201_CREATED, 
+    summary="Increment tag.", 
     tags=["Tags"]
 )
 async def increment_tag(tag: TagCreate):
