@@ -1,3 +1,4 @@
+from fastapi.responses import JSONResponse
 import re
 from typing import List
 from pydantic import BaseModel, validator
@@ -68,3 +69,8 @@ class IsValidValueError(Exception):
         self.message = message
         super().__init__(message)
 
+def ErrorResponseModel(code, message):
+    return JSONResponse(
+        status_code=code, 
+        content={"code": code, "message": message}
+    )
