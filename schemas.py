@@ -22,7 +22,7 @@ class TagCreate(Tag):
     def is_valid_name(cls, name: str):
         valid_chars = is_valid_chars(name)   
         if not valid_chars:  
-            raise IsValidCharsError(value=valid_chars, message="[a-z_]required")
+            raise IsValidCharsError(value=valid_chars, message="[a-z_] required")
         
         valid_digits = is_valid_digits(name)
         if not valid_digits:

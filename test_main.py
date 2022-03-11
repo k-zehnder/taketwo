@@ -5,8 +5,6 @@ from main import app
 import pytest 
 
 
-# USAGE python -m pytest
-
 client = TestClient(app)
 
 
