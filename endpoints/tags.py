@@ -34,7 +34,7 @@ async def get_tags():
 )
 async def increment_tag(tag: TagCreate):
     """
-    Create/Update a Tag object with all the information:
+    Create/Update a Tag object:
 
     - **name**: each Tag must have a name [a-z_]{3, 15}
     - **value**: each Tag must have a value 0 <= value < 10
