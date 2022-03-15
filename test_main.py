@@ -4,6 +4,7 @@ from starlette.testclient import TestClient
 from schemas import Tag
 from main import app
 import pytest 
+from config import CREDS
 
 
 client = TestClient(app)
@@ -15,7 +16,7 @@ def test_app_init():
 
 def test_db_init():
     session = firestore.client()
-    cred = credentials.Certificate("./project3-343609-3de9eceebaa1.json")
+    cred = credentials.Certificate(CREDS)
     assert cred != None
     assert session != None
 

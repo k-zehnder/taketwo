@@ -7,3 +7,4 @@ uvloop
 httptools
 firebase_admin
 google-cloud-logging>=3.0.0
+google-cloud

@@ -2,35 +2,32 @@ from typing import List
 import google.cloud.logging
 from firebase_admin import credentials, firestore, initialize_app
 from schemas import Tag, TagRead, TagCreate
-from config import TAG_DB
+from config import TAG_DB, CREDS
 
 
-def update_tag(session, tag: Tag, current_value: int) -> Tag:
-    session.collection(TAG_DB).document(tag.name).update({
-                'value': tag.value + current_value
-            })
-    return tag
+def update_tag(session, tag: Tag) -> Tag:
+    tag_ref = session.collection(TAG_DB).document(tag.name)
+    tag_ref.update({"value": firestore.Increment(tag.value)})
 
 def get_all_tags(session) -> List[Tag]:
-    collection = session.collection(TAG_DB).stream()
-    return [Tag(name=c.get("name"), value=c.get("value")) for c in collection]
+    all_tags = session.collection(TAG_DB).stream()
+    return [Tag(name=c.get("name"), value=c.get("value")) for c in all_tags]
 
 def get_tag_sum(session) -> int:
     return sum(t.value for t in get_all_tags(session))
 
-def get_tags_by_name(session, tag: Tag) -> list:
-    return list(session.collection(TAG_DB).where(u'name', u'==', tag.name).stream())
+def get_tags_by_name(session, tag: Tag):
+    tag_ref = session.collection(TAG_DB).document(tag.name)
+    tag = tag_ref.get()
+    return tag
 
 def create_tag(session, tag: TagCreate) -> Tag:
     new_doc = session.collection(TAG_DB).document(tag.name)
     new_doc.set(tag.dict())  
     return tag
 
-def get_current_value(tag: Tag) -> int:
-    return tag[0].get("value")
-
 def get_session():
-    cred = credentials.Certificate("./project3-343609-3de9eceebaa1.json")
+    cred = credentials.Certificate(CREDS)
     default_app = initialize_app(cred)
     session = firestore.client()
     return session

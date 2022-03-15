@@ -1,4 +1,4 @@
-from helpers import get_all_tags, get_session, get_logger, create_tag, get_current_value, update_tag, get_tags_by_name, get_tag_sum, log_tag_sum, log_new_tag
+from helpers import get_all_tags, get_session, get_logger, create_tag, update_tag, get_tags_by_name, get_tag_sum, log_tag_sum, log_new_tag
 from fastapi import APIRouter, status
 from schemas import Tag, TagCreate, TagRead
 from config import LOG_NAME
@@ -41,8 +41,7 @@ async def increment_tag(tag: TagCreate):
     """
     existing_tag = get_tags_by_name(session, tag)
     if existing_tag:
-        current_value = get_current_value(existing_tag)
-        return update_tag(session, tag, current_value)
+        return update_tag(session, tag)
     log_new_tag(logger, tag)
     return create_tag(session, tag)
 
