@@ -20,7 +20,6 @@ def get_tags_by_name(session, tag: Tag):
     tag_ref = session.collection(TAG_DB).document(tag.name)
     tag = tag_ref.get()
     return tag
-    # return tag_ref.get()
 
 def create_tag(session, tag: TagCreate) -> Tag:
     new_doc = session.collection(TAG_DB).document(tag.name)

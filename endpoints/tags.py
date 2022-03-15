@@ -40,7 +40,7 @@ async def increment_tag(tag: TagCreate):
     - **value**: each Tag must have a value 0 <= value < 10
     """
     existing_tag = get_tags_by_name(session, tag)
-    if existing_tag:
+    if existing_tag.exists:
         return update_tag(session, tag)
     log_new_tag(logger, tag)
     return create_tag(session, tag)
