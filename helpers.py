@@ -8,6 +8,7 @@ from config import TAG_DB, CREDS
 def update_tag(session, tag: Tag) -> Tag:
     tag_ref = session.collection(TAG_DB).document(tag.name)
     tag_ref.update({"value": firestore.Increment(tag.value)})
+    return tag
 
 def get_all_tags(session) -> List[Tag]:
     all_tags = session.collection(TAG_DB).stream()
