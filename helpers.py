@@ -23,8 +23,7 @@ def get_tags_by_name(session, tag: Tag):
     return tag
 
 def create_tag(session, tag: TagCreate) -> Tag:
-    new_doc = session.collection(TAG_DB).document(tag.name)
-    new_doc.set(tag.dict())  
+    new_doc = session.collection(TAG_DB).add(tag.dict())
     return tag
 
 def get_session():
