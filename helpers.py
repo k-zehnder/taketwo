@@ -8,7 +8,12 @@ from config import TAG_DB, CREDS
 def update_tag(session, tag: Tag) -> Tag:
     tag_ref = session.collection(TAG_DB).document(tag.name)
     tag_ref.update({"value": firestore.Increment(tag.value)})
-    return tag
+
+# def update_tag(session, tag: Tag) -> Tag:
+#     tag_ref = session.collection(TAG_DB)
+#     tag_ref = tag_ref.where("name", "==", tag.name)
+#     tag_ref.update({"value": firestore.Increment(tag.value)})
+#     return tag
 
 def get_all_tags(session) -> List[Tag]:
     all_tags = session.collection(TAG_DB).stream()
@@ -23,8 +28,13 @@ def get_tags_by_name(session, tag: Tag):
     return tag
 
 def create_tag(session, tag: TagCreate) -> Tag:
-    new_doc = session.collection(TAG_DB).add(tag.dict())
+    new_doc = session.collection(TAG_DB).document(tag.name)
+    new_doc.set(tag.dict())  
     return tag
+
+# def create_tag(session, tag: TagCreate) -> Tag:
+#     new_doc = session.collection(TAG_DB).set(tag.dict())
+#     return tag
 
 def get_session():
     cred = credentials.Certificate(CREDS)
