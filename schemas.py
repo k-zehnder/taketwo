@@ -1,5 +1,6 @@
 from fastapi.responses import JSONResponse
 import re
+from enum import Enum
 from typing import List
 from pydantic import BaseModel, validator
 from config import VALID_NAME_CHARACTERS, VALID_NAME_RANGE
@@ -39,6 +40,10 @@ class TagCreate(Tag):
 
 class TagRead(BaseModel):
     data: List[Tag]
+
+class Tags(Enum):
+    index = "index"
+    tags = "tags"
 
 
 def is_valid_digits(query: str) -> bool:
