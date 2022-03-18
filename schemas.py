@@ -41,9 +41,9 @@ class TagCreate(Tag):
 class TagRead(BaseModel):
     data: List[Tag]
 
-class Tags(Enum):
-    index = "index"
-    tags = "tags"
+class TagEnum(Enum):
+    index = "Index"
+    tags = "Tags"
 
 
 def is_valid_digits(query: str) -> bool:

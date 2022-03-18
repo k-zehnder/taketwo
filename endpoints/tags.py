@@ -1,6 +1,6 @@
 from helpers import get_all_tags, get_session, get_logger, create_tag, update_tag, get_tags_by_name, get_tag_sum, log_tag_sum, log_new_tag
 from fastapi import APIRouter, status
-from schemas import Tag, TagCreate, TagRead
+from schemas import Tag, TagCreate, TagRead, TagEnum
 from config import LOG_NAME
 
 
@@ -15,7 +15,7 @@ session = get_session()
     response_model=TagRead, 
     status_code=status.HTTP_200_OK, 
     summary="Get all tags.", 
-    tags=["Tags"]
+    tags=[TagEnum.tags]
 )
 async def get_tags():
     """
@@ -30,7 +30,7 @@ async def get_tags():
     response_model=Tag, 
     status_code=status.HTTP_201_CREATED, 
     summary="Increment tag.", 
-    tags=["Tags"]
+    tags=[TagEnum.tags]
 )
 async def increment_tag(tag: TagCreate):
     """
